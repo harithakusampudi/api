@@ -3,31 +3,11 @@ import './App.css';
 import Search from './Search';
 import List from './List';
 import  {MyMapComponent} from './Map' ;
-// import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
-
-// const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-// (
-// <div>
-//   {props.lat && props.lng && props.restaurantsarray? 
-//   <GoogleMap
-//   defaultZoom={8}
-//   defaultCenter={{ lat: props.lat , lng: props.lng }}>
-//   {props.isMarkerShown && <Marker position={{ lat: props.lat, lng: props.lng }} />}
-//   {this.props.restaurantsarray.map((restaurant)=>{
-//     var {latitude}=restaurant.location;
-//     var {longitude}=restaurant.location;
-//     {props.isMarkerShown && <Marker position={{ lat:latitude, lng:longitude}} />}
-//   })}
-// </GoogleMap>
-//  : <div/> }</div>)
-// ))
-
 
 export default class App extends React.Component {
   constructor(props){
     super(props);
     this.state={
-        cityname:"",
         lattitude:"",
         longitude:"",
         restaurantsarray:[]     
@@ -36,7 +16,7 @@ export default class App extends React.Component {
   }
 
   getLocation(search_term) {
-  
+    this.setState({restaurantsarray:[]})
     fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" +search_term +"&key=AIzaSyBD7rTFBdBhhCqd3imOwhKpis6KJ1izqs0",{
       method: 'GET',})
       .then((response) => response.json())
@@ -56,7 +36,7 @@ export default class App extends React.Component {
           // console.log("list",responseJson) 
           responseJson.restaurants.map((obj)=> {
             var {restaurant} = obj;
-            this.setState({restaurantsarray:[...this.state.restaurantsarray,restaurant]})          
+            this.setState(prevState => ({restaurantsarray: [...prevState.restaurantsarray, restaurant]}))         
           })
           console.log(this.state.restaurantsarray)
         })
@@ -74,9 +54,16 @@ export default class App extends React.Component {
         <Search onClick={this.getLocation}/>
         <div class="body_container">
           <List items={this.state.restaurantsarray}/>
+          <MyMapComponent lat={this.state.lattitude} lng={this.state.longitude} 
+              restaurantsarray={this.state.restaurantsarray}
+              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `400px` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+              isMarkerShown
+          />
         </div>
-        <MyMapComponent lat={this.state.lattitude} lng={this.state.longitude}/>
-     </div>
+      </div>
     );
   }
 }
