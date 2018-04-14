@@ -1,0 +1,25 @@
+.search_box{
+  width:500px;
+  height: 25px;
+ 
+}
+.button{
+  margin-left: 5px;
+  height: 30px;
+  width:60px;
+}
+.header_container{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.body_container{
+  display: flex;
+  justify-content: center;
+}
+.body_container >div{
+  width: 600px;
+  height: 400px;
+  margin: 60px;
+  background-color:#efefef;
+}
