@@ -5,16 +5,15 @@ import React from 'react'
 export const MyMapComponent = withScriptjs(withGoogleMap((props) =>
 (
 <div>
-  <h5>{props.restaurantsarray}</h5>
   {props.lat && props.lng?
   <GoogleMap
-  defaultZoom={8}
+  defaultZoom={10}
   defaultCenter={{ lat: props.lat , lng: props.lng }}>
   {props.isMarkerShown && <Marker position={{ lat: props.lat, lng: props.lng }} />}
   {props.restaurantsarray.map((restaurant)=>
   {
     var {latitude,longitude}=restaurant.location;
-     <Marker position={{ lat: latitude, lng: longitude }} />
+     return <Marker position={{ lat: parseFloat(latitude), lng: parseFloat(longitude) }} />
   })}
 </GoogleMap>
  : <div/> }</div>)
