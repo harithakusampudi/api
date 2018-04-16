@@ -24,16 +24,22 @@
   background-color:white;
 }
 .restaurantdetails_container {
-  width:500px;
+  width:520px;
   height:100px;
   display:flex; 
+  border-color: black;
   flex-direction: row;
-  margin-left: 5px;
   margin :10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color:black;
   background-color: #efefef;
 }
 .restaurantdetails_container >img{
   width:100px; height:100px;
+  border-right-width:1px;
+  border-right-style:solid;
+  border-color:purple;
 }
 .restaurantdetails_container >p{
 font-size: 16px;
