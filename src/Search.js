@@ -30,9 +30,9 @@ export default class Search extends React.Component{
         return(
             <div class="header_container">
                 <div>
-                    <p>Search nearby restaurants</p>
-                    <input onChange={this.updateSearchValue} class="search_box"placeholder="enter a city name to search"/>
-                    <button class="button" onClick={this.buttonClick}>search</button>
+                    <p>Search Nearby Restaurants</p>
+                    <input onChange={this.updateSearchValue} class="search_box"placeholder="Enter a City Name to Search"/>
+                    <button class="button" onClick={this.buttonClick}>Search</button>
                 </div>
             </div>
         );
