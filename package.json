@@ -6,6 +6,7 @@
     "bootstrap": "^4.0.0",
     "google-maps-react": "^2.0.0",
     "react": "^16.3.1",
+    "react-clickable": "^1.0.0",
     "react-dom": "^16.3.1",
     "react-geocode": "0.0.7",
     "react-google-maps": "^9.4.5",
