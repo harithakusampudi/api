@@ -10,7 +10,7 @@ export default class List extends React.Component{
         
     }
     listClick(restaurant){
-        console.log(JSON.stringify(restaurant))
+        // console.log(JSON.stringify(restaurant))
         this.props.onClick(restaurant)
     }
         render(){
@@ -18,21 +18,17 @@ export default class List extends React.Component{
                 <div >   
                     {this.props.restaurants.map(restaurant=>
                      <div  onClick={()=>{this.listClick(restaurant)}}>
-                        {restaurant.thumb&&restaurant.name?
-                        <div class="restaurantdetails_container">
-                            <img src={restaurant.thumb}/>
-                            <p>{restaurant.name}<br/>{restaurant.location.address}</p>
-                        </div>:
-                        <div class="restaurantdetails_container">
-                            <p>{restaurant.name}<br/>{restaurant.location.address}</p>
-                        </div>}
-                       
-                        </div>
-                        
+                            {restaurant.thumb&&restaurant.name?
+                                 <div class="restaurantdetails_container">
+                                     <img src={restaurant.thumb}/>
+                                     <p>{restaurant.name}<br/>{restaurant.location.address}</p>
+                                </div>:
+                                <div class="restaurantdetails_container">
+                                     <p>{restaurant.name}<br/>{restaurant.location.address}</p>
+                                </div>}
+                     </div>   
                      )}
-                    
                 </div> 
-                    
             );
         }
     }

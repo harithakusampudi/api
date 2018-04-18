@@ -13,25 +13,30 @@ export default class App extends React.Component {
     this.state={
         lattitude:"",
         longitude:"",
-        marklat:"",
-        marklng:"",
         restaurantsarray:[] ,
-        selectedRestaurant:{"R":{"res_id":18612817},"apikey":"7641fe7fab9aed34fc79418f44a4867b","id":"18612817","name":"Kaka's Deli","url":"https://www.zomato.com/goa/kakas-deli-quepem?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1","location":{"address":"Bepquegal, Vodlemol, Cacora, Goa","locality":"Quepem","city":"Goa","city_id":13,"latitude":"15.2595500899","longitude":"74.1102828272","zipcode":"","country_id":1,"locality_verbose":"Quepem, Goa"},"switch_to_order_menu":0,"cuisines":"North Indian","average_cost_for_two":400,"price_range":2,"currency":"Rs.","offers":[],"thumb":"","user_rating":{"aggregate_rating":"0","rating_text":"Not rated","rating_color":"CBCBC8","votes":"3"},"photos_url":"https://www.zomato.com/goa/kakas-deli-quepem/photos?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1#tabtop","menu_url":"https://www.zomato.com/goa/kakas-deli-quepem/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop","featured_image":"","has_online_delivery":0,"is_delivering_now":0,"deeplink":"zomato://restaurant/18612817","has_table_booking":0,"events_url":"https://www.zomato.com/goa/kakas-deli-quepem/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1","establishment_types":[]} 
+        selectedRestaurant:{},
+        autolist:[],
+      
   }
     this.getLocation=this.getLocation.bind(this);
     this.click=this.click.bind(this);
+    this.removeAutolist=this.removeAutolist.bind(this);
+    this.autoComplete=this.autoComplete.bind(this)
   }
 
   getLocation(search_term) {
+  console.log("search_term",search_term)
+    
     this.setState({restaurantsarray:[]})
-    fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" +search_term +"&key=AIzaSyBD7rTFBdBhhCqd3imOwhKpis6KJ1izqs0",{
+    fetch(" https://maps.googleapis.com/maps/api/place/details/json?placeid=" + search_term.place_id +"&key=AIzaSyBUJx80sMf2DQF9hsGC0tgiKxGusOt0KEo",{
       method: 'GET',})
       .then((response) => response.json())
       .then((responseJson) => {
         console.log("list",responseJson) 
-        var {lat,lng}=responseJson.results[0].geometry.location;
+        var {lat,lng}=responseJson.result.geometry.location;
         this.setState({lattitude:lat})
         this.setState({longitude:lng})
+
         fetch('https://developers.zomato.com/api/v2.1/search?entity_type=city&count=20&lat='+this.state.lattitude + '&lon='+this.state.longitude +'&radius=1&sort=real_distance',{
           method: 'GET',
           headers: {
@@ -45,24 +50,48 @@ export default class App extends React.Component {
             var {restaurant} = obj;
             this.setState(prevState => ({restaurantsarray: [...prevState.restaurantsarray, restaurant]}))         
           })
-          console.log(this.state.restaurantsarray)
         })
         .catch((error) => {
           console.error(error);
         });
       
-     }   ).catch((error) => {
+        }).catch((error) => {
         console.error(error);
       });
+      
+  
   }
+  autoComplete(search_term)
+  {
+    fetch("https://maps.googleapis.com/maps/api/place/autocomplete/json?input="+search_term+"&key=AIzaSyBUJx80sMf2DQF9hsGC0tgiKxGusOt0KEo",{
+      method: 'GET',
+   })
+      .then((response) => {
+        console.log(response.body)
+        return response.json()
+      })
+      .then((responseJson) => {
+        console.log("list",responseJson) 
+        var {predictions}=responseJson
+        this.setState({autolist:predictions})
+      }).catch((error) => {
+          console.error(error);
+      });
+  }
+  
   click(restaurant)
   {
     this.setState({selectedRestaurant:restaurant})
   }
+  removeAutolist()
+  {
+    this.setState({autolist:[]})
+ 
+  }
   render() {
     return (
       <div>
-        <Search onClick={this.getLocation}/>
+        <Search onClick={this.getLocation} remove={this.removeAutolist}onChange={this.autoComplete} autolist={this.state.autolist} />
         <div class="body_container">
           <List restaurants={this.state.restaurantsarray}   onClick={this.click}/>
           <MyMapComponent lat={this.state.lattitude} lng={this.state.longitude} 
