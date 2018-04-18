@@ -15,7 +15,7 @@ export default class List extends React.Component{
     }
         render(){
             return(
-                <div >   
+                <div class="scroll">   
                     {this.props.restaurants.map(restaurant=>
                      <div  onClick={()=>{this.listClick(restaurant)}}>
                             {restaurant.thumb&&restaurant.name?

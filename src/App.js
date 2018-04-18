@@ -3,6 +3,7 @@ import './App.css';
 import Search from './Search';
 import List from './List';
 import {MyMapComponent} from './Map' ;
+var ScrollArea = require('react-scrollbar');
 // import Markers from './Markers';
 // import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
@@ -36,7 +37,6 @@ export default class App extends React.Component {
         var {lat,lng}=responseJson.result.geometry.location;
         this.setState({lattitude:lat})
         this.setState({longitude:lng})
-
         fetch('https://developers.zomato.com/api/v2.1/search?entity_type=city&count=20&lat='+this.state.lattitude + '&lon='+this.state.longitude +'&radius=1&sort=real_distance',{
           method: 'GET',
           headers: {
@@ -93,7 +93,7 @@ export default class App extends React.Component {
       <div>
         <Search onClick={this.getLocation} remove={this.removeAutolist}onChange={this.autoComplete} autolist={this.state.autolist} />
         <div class="body_container">
-          <List restaurants={this.state.restaurantsarray}   onClick={this.click}/>
+          <List restaurants={this.state.restaurantsarray}   onClick={this.click}/> 
           <MyMapComponent lat={this.state.lattitude} lng={this.state.longitude} 
               googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: `100%` }} />}

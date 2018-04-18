@@ -5,7 +5,7 @@ import './App.css'
 export const MyMapComponent = withScriptjs(withGoogleMap((props) =>
 (
 <div class="map_box">
-{console.log(props.selectedRestaurant)}
+{console.log("selectedrestaurant",props.selectedRestaurant)}
   {props.lat && props.lng&&props.selectedRestaurant?
   <GoogleMap
   defaultZoom={10}
