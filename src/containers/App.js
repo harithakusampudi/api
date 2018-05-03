@@ -17,7 +17,7 @@ export default class App extends React.Component {
       <div>
         <Search todos={this.props.todos} actions={this.props.actions}/>
         <div class="body_container">
-          <List restaurants={this.props.todos.restaurants} actions={this.props.actions} /> 
+          <List restaurants={this.props.todos.restaurants} actions={this.props.actions} todos={this.props.todos}/> 
           <MyMapComponent location={this.props.todos.location} lat={this.props.todos.lat} lng={this.props.todos.lng}
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}

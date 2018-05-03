@@ -3,7 +3,7 @@ import React from 'react'
 export const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     (
         <div> 
-        {props.location? 
+        {props.location ? 
             <GoogleMap
                     defaultZoom={10}
                     defaultCenter={{ lat:parseFloat(props.location.lat), lng: parseFloat(props.location.lng) }}>

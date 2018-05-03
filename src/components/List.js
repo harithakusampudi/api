@@ -8,7 +8,7 @@ export default class List extends React.Component{
             return(
                     <div class="scroll">   
                     {this.props.restaurants? this.props.restaurants.map(restaurant=>
-                     <div onClick={()=>{this.props.actions.onRestaurantClick(this.props.restaurants,{lat: restaurant.location.latitude}, {lng:restaurant.location.longitude})}}>
+                     <div onClick={()=>{this.props.actions.onRestaurantClick(this.props.restaurants,restaurant.restaurant.location.latitude,restaurant.restaurant.location.longitude)}}>
                             {restaurant.restaurant.thumb&&restaurant.restaurant.name?
                                  <div class="restaurantdetails_container">
                                      <img src={restaurant.restaurant.thumb} alt="thumb"/>

@@ -2,16 +2,20 @@ import {changeSearchList} from './searching'
 import {changeLocation} from './location'
 import {restaurantList} from './restaurant'
 export const CHANGE_TERM = 'CHANGE_TERM'
-export const GET_LOCATION = 'GET_LOCATION'
+export const GET_RESTAURANT_LOCATION = 'GET_RESTAURANT_LOCATION'
 
 export const changeSearchTerm = (term) => ({
     type: CHANGE_TERM,
     term
   })
-  export const onRestaurantClick=(restaurants,lat,lng)=>({
-    type:GET_LOCATION,
-    restaurants,lat,lng
-  })
+  export const onRestaurantClick=(restaurants,lat,lng)=>{
+  var location={lat,lng}
+    return {
+    type:GET_RESTAURANT_LOCATION,
+    restaurants,
+   location
+  }
+}
 export const fetchAutoList = term => dispatch => {
     return fetch("https://maps.googleapis.com/maps/api/place/autocomplete/json?input="+term+"&key=AIzaSyBUJx80sMf2DQF9hsGC0tgiKxGusOt0KEo")
       .then(response => response.json())
