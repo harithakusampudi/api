@@ -8,7 +8,7 @@ import App from './App'
  
 
 const mapStateToProps = state => ({
-   todos:state.todos,
+   states:state.states,
 })
   
 function mapDispatchToProps(dispatch) {

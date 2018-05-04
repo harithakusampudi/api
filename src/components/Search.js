@@ -16,9 +16,9 @@ export default class Search extends React.Component{
       this.props.actions.fetchAutoList(e.target.value)
     }
     componentWillReceiveProps(nextProps) { 
-        if(nextProps.todos.location&&nextProps.todos.place_id){
-            const {location}=nextProps.todos
-            const {lat, lng} = nextProps.todos.location
+        if(nextProps.states.location&&nextProps.states.place_id){
+            const {location}=nextProps.states
+            const {lat, lng} = nextProps.states.location
             this.props.actions.getRestaurants(location,lat, lng)
         }
     }
@@ -27,8 +27,8 @@ export default class Search extends React.Component{
             <div class="header_container">
                 <div>
                     <p>Search Nearby Restaurants</p>
-                    <input value={this.props.todos.term} onChange={this.updateSearchValue} class="search_box" placeholder="Seacrh Here" />
-                    {this.props.todos.list? this.props.todos.list.map((obj)=>
+                    <input value={this.props.states.term} onChange={this.updateSearchValue} class="search_box" placeholder="Seacrh Here" />
+                    {this.props.states.list? this.props.states.list.map((obj)=>
                         <div class="auto_box" onClick={()=>{
                                               this.props.actions.changeSearchTerm(obj.description);
                                               this.props.actions.getLocation(obj.place_id)

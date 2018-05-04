@@ -12,10 +12,10 @@ export default class List extends React.Component{
                             {restaurant.restaurant.thumb&&restaurant.restaurant.name?
                                  <div class="restaurantdetails_container">
                                      <img src={restaurant.restaurant.thumb} alt="thumb"/>
-                                     <p>{restaurant.restaurant.name}<br/>{restaurant.restaurant.location.address}</p>
+                                     <p><h4>{restaurant.restaurant.name}</h4>{restaurant.restaurant.location.address}</p>
                                 </div>:
                                 <div class="restaurantdetails_container">
-                                     <p>{restaurant.restaurant.name}<br/>{restaurant.restaurant.location.address}</p>
+                                     <p><h4>{restaurant.restaurant.name}</h4>{restaurant.restaurant.location.address}</p>
                                 </div>}
                      </div>):<div/>}
                 </div> 

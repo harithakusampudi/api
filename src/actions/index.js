@@ -13,7 +13,7 @@ export const changeSearchTerm = (term) => ({
     return {
     type:GET_RESTAURANT_LOCATION,
     restaurants,
-   location
+    location
   }
 }
 export const fetchAutoList = term => dispatch => {

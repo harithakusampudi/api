@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import todos from './reducer'
+import states from './reducer'
 
 export default combineReducers({
- todos
+ states
 })

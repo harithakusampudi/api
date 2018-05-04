@@ -3,7 +3,7 @@ import {GET_RESTAURANT_LIST} from '../actions/restaurant'
 import {RECEIVE_AUTO_LIST} from '../actions/searching'
 import {CHANGE_TERM,GET_RESTAURANT_LOCATION} from '../actions'
 
-const reducer = (state={}, action) => {
+const states = (state={}, action) => {
   switch (action.type) {
     case RECEIVE_AUTO_LIST:
       return { 
@@ -32,4 +32,4 @@ const reducer = (state={}, action) => {
       return state
     }
   }
-  export default reducer
+  export default states
